@@ -1,0 +1,239 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-nebula-blue: var(--nebula-blue);
+  --color-nebula-purple: var(--nebula-purple);
+  --color-nebula-pink: var(--nebula-pink);
+  --color-hologram: var(--hologram);
+  --color-hologram-glow: var(--hologram-glow);
+  --font-display: "Orbitron", "Space Grotesk", ui-sans-serif, system-ui;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Deep space palette */
+  --background: oklch(0.06 0.02 265);
+  --foreground: oklch(0.97 0.01 250);
+  --card: oklch(0.12 0.04 265 / 0.6);
+  --card-foreground: oklch(0.97 0.01 250);
+  --popover: oklch(0.1 0.04 265);
+  --popover-foreground: oklch(0.97 0.01 250);
+  --primary: oklch(0.72 0.19 240);
+  --primary-foreground: oklch(0.06 0.02 265);
+  --secondary: oklch(0.18 0.06 280);
+  --secondary-foreground: oklch(0.97 0.01 250);
+  --muted: oklch(0.18 0.04 265);
+  --muted-foreground: oklch(0.7 0.04 260);
+  --accent: oklch(0.65 0.24 300);
+  --accent-foreground: oklch(0.98 0.01 250);
+  --destructive: oklch(0.65 0.24 25);
+  --destructive-foreground: oklch(0.98 0.01 250);
+  --border: oklch(0.35 0.08 265 / 0.4);
+  --input: oklch(0.2 0.06 265 / 0.6);
+  --ring: oklch(0.72 0.19 240);
+
+  --nebula-blue: oklch(0.55 0.22 250);
+  --nebula-purple: oklch(0.5 0.25 300);
+  --nebula-pink: oklch(0.7 0.22 340);
+  --hologram: oklch(0.85 0.18 210);
+  --hologram-glow: oklch(0.75 0.22 230);
+
+  --gradient-nebula: radial-gradient(
+      ellipse at 20% 30%,
+      oklch(0.55 0.25 260 / 0.55),
+      transparent 55%
+    ),
+    radial-gradient(ellipse at 80% 60%, oklch(0.5 0.28 310 / 0.5), transparent 55%),
+    radial-gradient(ellipse at 60% 20%, oklch(0.65 0.2 200 / 0.35), transparent 60%),
+    radial-gradient(ellipse at 30% 80%, oklch(0.6 0.2 330 / 0.35), transparent 55%);
+  --gradient-hologram: linear-gradient(
+    135deg,
+    oklch(0.75 0.22 210 / 0.9),
+    oklch(0.65 0.24 280 / 0.9)
+  );
+
+  --shadow-hologram: 0 0 40px oklch(0.72 0.22 230 / 0.55),
+    0 0 80px oklch(0.6 0.25 280 / 0.35);
+  --shadow-glow-strong: 0 0 60px oklch(0.72 0.22 230 / 0.7),
+    inset 0 0 30px oklch(0.75 0.22 230 / 0.25);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-display);
+    cursor: none;
+  }
+
+  ::selection {
+    background: oklch(0.72 0.19 240 / 0.4);
+    color: oklch(0.98 0.01 250);
+  }
+}
+
+@utility glass-panel {
+  background: linear-gradient(
+    135deg,
+    oklch(0.2 0.06 265 / 0.35),
+    oklch(0.1 0.04 280 / 0.25)
+  );
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid oklch(0.75 0.15 230 / 0.25);
+  box-shadow: 0 8px 32px oklch(0.05 0.02 265 / 0.5),
+    inset 0 1px 0 oklch(0.9 0.05 230 / 0.15);
+}
+
+@utility text-hologram {
+  background: linear-gradient(
+    180deg,
+    oklch(0.95 0.05 220) 0%,
+    oklch(0.75 0.2 230) 50%,
+    oklch(0.6 0.24 280) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px oklch(0.72 0.22 230 / 0.4);
+  filter: drop-shadow(0 0 12px oklch(0.72 0.22 230 / 0.6));
+}
+
+@utility btn-cosmic {
+  position: relative;
+  overflow: hidden;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(
+    135deg,
+    oklch(0.2 0.08 265 / 0.55),
+    oklch(0.15 0.1 300 / 0.45)
+  );
+  backdrop-filter: blur(14px);
+  border: 1px solid oklch(0.75 0.18 230 / 0.4);
+  color: oklch(0.97 0.02 230);
+  box-shadow: 0 0 20px oklch(0.7 0.2 240 / 0.3),
+    inset 0 1px 0 oklch(0.95 0.05 230 / 0.2);
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 200ms ease, border-color 200ms ease;
+}
+
+@utility scanline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      oklch(0.95 0.1 220 / 0.35) 50%,
+      transparent 100%
+    );
+    background-size: 100% 30%;
+    background-repeat: no-repeat;
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+}
+
+@keyframes scan {
+  0% { background-position: 0 -100%; }
+  100% { background-position: 0 200%; }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+@keyframes hologram-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.92; }
+  55% { opacity: 1; }
+}
+
+@keyframes shooting-star {
+  0% { transform: translate(0, 0) rotate(-20deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(120vw, 40vh) rotate(-20deg); opacity: 0; }
+}
+
+@keyframes ship-fly {
+  0% { transform: translate(-15vw, 20vh) rotate(8deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translate(115vw, -10vh) rotate(8deg); opacity: 0; }
+}
+
+@keyframes warp-in {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(20); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
